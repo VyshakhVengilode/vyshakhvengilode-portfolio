@@ -1,214 +1,47 @@
-import { sharedMetadata } from "./sharedMetadata";
 import type { Metadata } from "next";
-import React from "react";
-
-import { Heading, Flex, Text, Button, Avatar, RevealFx, Column, Badge, Row, Icon, IconButton, SmartImage, Tag } from "@/once-ui/components";
-import { Projects } from "@/components/work/Projects";
-
-import { baseURL, routes } from "@/app/resources";
-import { home, about, person, newsletter } from "@/app/resources/content";
+import { Column, Heading, Text } from "@/once-ui/components";
 import { Mailchimp } from "@/components";
 import { Posts } from "@/components/blog/Posts";
-import { Meta, Schema } from "@/once-ui/modules";
-import styles from "@/components/about/about.module.scss";
+import { Projects } from "@/components/work/Projects";
+import { newsletter } from "@/app/resources/content";
+import TemporalExperience from "@/components/TemporalExperience";
+import styles from "./home.module.scss";
 
-
-export async function generateMetadata({ params }: { params?: any }): Promise<Metadata> {
-  return {
-    ...sharedMetadata, // <-- this line adds your shared fields!
-    title: "Vyshakh Vengilode's Portfolio",
-    description: "Portfolio website showcasing my work as a Graphic Designer | Writer | Developer",
-    metadataBase: new URL("https://magic-portfolio-for-next-js-psi-sable.vercel.app"),
-    openGraph: {
-      title: "Vyshakh Vengilode's Portfolio",
-      description: "Portfolio website showcasing my work as a Graphic Designer | Writer | Developer",
-      siteName: "Vyshakh Vengilode's Portfolio",
-      images: [
-        {
-          url: "/images/projects/project-01/portfolio-01.jpg",
-          width: 1200,
-          height: 630,
-          alt: "Vyshakh Vengilode's Portfolio",
-        },
-      ],
-      locale: "en_US",
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: "Vyshakh Vengilode's Portfolio",
-      description: "Portfolio website showcasing my work as a Graphic Designer | Writer | Developer",
-      images: [
-        "/images/projects/project-01/portfolio-01.jpg",
-      ],
-      creator: "@vyshakhvengilode"
-    },
-    alternates: {
-      canonical: "", 
-    }
-  };
-}
+export const metadata: Metadata = {
+  title: "Vyshakh Vengilode | Creative Intelligence Across Time",
+  description: "The creative universe of Vyshakh Vengilode — design, writing, technology, science and digital experiences.",
+  metadataBase: new URL("https://magic-portfolio-for-next-js-psi-sable.vercel.app"),
+  openGraph: {
+    title: "Vyshakh Vengilode | Creative Intelligence Across Time",
+    description: "Design. Words. Code. Curiosity. One evolving creative practice.",
+    images: ["/images/og/home.jpg"],
+    type: "website",
+  },
+};
 
 export default function Home() {
   return (
-    <Column maxWidth="m" gap="0" horizontal="center">
-      <RevealFx translateY="16" delay={0.6}>
-        <Projects range={[1, 1]} />
-      </RevealFx>
-      <Schema
-        as="webPage"
-        baseURL={baseURL}
-        path={home.path}
-        title={home.title}
-        description={home.description}
-        image={`${baseURL}/og?title=${encodeURIComponent(home.title)}`}
-        author={{
-          name: person.name,
-          url: `${baseURL}${about.path}`,
-          image: `${baseURL}${person.avatar}`,
-        }}
-      />
-<Column fillWidth paddingY="24" gap="0" horizontal="center">
-  <Column fillWidth horizontal="center">
-<RevealFx fillWidth horizontal="center" paddingBottom="12" paddingTop="2" delay={0.4}>
-  <Button
-    id="about"
-    data-border="rounded"
-    href={about.path}
-    variant="secondary"
-    size="m"
-    arrowIcon
-  >
-    <Flex gap="8" vertical="center">
-      {about.avatar.display && (
-        <Avatar
-          style={{ marginLeft: "-0.75rem", marginRight: "0.25rem" }}
-          src={person.avatar}
-          size="m"
-        />
-      )}
-      {about.title}
-    </Flex>
-  </Button>
-</RevealFx>
-    <RevealFx translateY="4" fillWidth horizontal="center" paddingBottom="16">
-      <Heading
-        wrap="balance"
-        variant="display-strong-l"
-        style={{ textAlign: "center" }}
-      >
-        {home.headline}
-      </Heading>
-    </RevealFx>
-    <RevealFx translateY="8" delay={0.2} fillWidth horizontal="center" paddingBottom="32">
-      <Text
-        wrap="balance"
-        onBackground="neutral-weak"
-        variant="heading-default-xl"
-        style={{ textAlign: "center" }}
-      >
-        {home.subline}
-      </Text>
-    </RevealFx>
-  </Column>
-              {home.calendar.display && (
-<Flex
-  gap="16"
-  marginBottom="m"
-  style={{
-    width: "100%",
-    display: "flex",
-    justifyContent: "center"
-  }}
-  mobileDirection="column"
->
-  {/* Schedule a call button */}
-  <Flex
-    fitWidth
-    border="brand-alpha-medium"
-    className={styles.blockAlign}
-    style={{
-      backdropFilter: "blur(var(--static-space-1))",
-      minWidth: 220,
-    }}
-    background="brand-alpha-weak"
-    radius="full"
-    padding="4"
-    gap="8"
-    vertical="center"
-  >
-    <Icon paddingLeft="12" name="calendar" onBackground="brand-weak" />
-    <Flex paddingX="8">Schedule a call</Flex>
-    <IconButton
-      href={home.calendar.link}
-      data-border="rounded"
-      variant="secondary"
-      icon="chevronRight"
-    />
-  </Flex>
-  {/* Artistry button */}
-  <Flex
-    fitWidth
-    border="brand-alpha-medium"
-    className={styles.blockAlign}
-    style={{
-      backdropFilter: "blur(var(--static-space-1))",
-    }}
-    background="brand-alpha-weak"
-    radius="full"
-    padding="4"
-    gap="8"
-    vertical="center"
-  >
-    <Icon paddingLeft="12" name="grid" onBackground="brand-weak" />
-    <Flex paddingX="8">Explore Artworks</Flex>
-    <IconButton
-      href="https://artistrydesigndiaries.blogspot.com/"
-      data-border="rounded"
-      variant="secondary"
-      icon="chevronRight"
-    />
-  </Flex>
-  {/* Link In Bio button */}
-  <Flex
-    fitWidth
-    border="brand-alpha-medium"
-    className={styles.blockAlign}
-    style={{
-      backdropFilter: "blur(var(--static-space-1))",
-    }}
-    background="brand-alpha-weak"
-    radius="full"
-    padding="4"
-    gap="8"
-    vertical="center"
-  >
-    <Icon paddingLeft="12" name="publications" onBackground="brand-weak" />
-    <Flex paddingX="8">Read Writings</Flex>
-    <IconButton
-      href="https://hopp.bio/vyshakhvengilode"
-      data-border="rounded"
-      variant="secondary"
-      icon="chevronRight"
-    />
-  </Flex>
-</Flex>
-            )}
-</Column>
-      {routes["/blog"] && (
-        <Flex fillWidth gap="24" mobileDirection="column">
-          <Flex flex={1} paddingLeft="l" paddingTop="24">
-            <Heading as="h2" variant="display-strong-xs" wrap="balance">
-              Latest from the blog
-            </Heading>
-          </Flex>
-          <Flex flex={3} paddingX="20">
-            <Posts range={[1, 2]} columns="2" />
-          </Flex>
-        </Flex>
-      )}
-      <Projects range={[2]} />
-      {newsletter.display && <Mailchimp newsletter={newsletter} />}
-    </Column>
+    <>
+      <TemporalExperience />
+      <div className={styles.archive}>
+        <section className={styles.archiveSection}>
+          <p className={styles.eyebrow}>THE WORK LOG / FEATURED TRANSMISSION</p>
+          <Heading as="h2" variant="display-strong-s">Selected work, in focus.</Heading>
+          <Text onBackground="neutral-weak" variant="body-default-m">A closer look at a featured project from the existing portfolio archive.</Text>
+          <Column fillWidth paddingTop="l"><Projects range={[1, 1]} /></Column>
+        </section>
+        <section className={styles.archiveSection}>
+          <p className={styles.eyebrow}>FIELD NOTES / RECENT WRITING</p>
+          <Heading as="h2" variant="display-strong-s">Latest from the blog.</Heading>
+          <Posts range={[1, 2]} columns="2" />
+        </section>
+        <section className={styles.archiveSection}>
+          <p className={styles.eyebrow}>THE OPEN ARCHIVE / MORE PROJECTS</p>
+          <Heading as="h2" variant="display-strong-s">More things made.</Heading>
+          <Projects range={[2]} />
+        </section>
+        {newsletter.display && <section className={styles.newsletter}><Mailchimp newsletter={newsletter} /></section>}
+      </div>
+    </>
   );
 }

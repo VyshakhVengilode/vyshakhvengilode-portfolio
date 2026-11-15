@@ -1,0 +1,7 @@
+
+.archive{position:relative;z-index:1;width:min(1100px,88vw);margin:0 auto;padding:10px 0 100px;color:#edf4fa}
+.archiveSection{padding:76px 0;border-top:1px solid rgba(160,191,221,.15)}
+.eyebrow{font:9px 'DM Mono',monospace;letter-spacing:.18em;color:#79e7f4;margin:0 0 14px}
+.archiveSection h2{margin-bottom:12px}
+.newsletter{padding:50px 0;border-top:1px solid rgba(160,191,221,.15)}
+@media(max-width:650px){.archive{width:88vw;padding-bottom:60px}.archiveSection{padding:52px 0}.archiveSection h2{font-size:2rem}}
