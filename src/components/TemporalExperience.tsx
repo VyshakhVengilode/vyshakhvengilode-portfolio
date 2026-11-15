@@ -63,7 +63,15 @@ export default function TemporalExperience() {
   };
 
   return (
-    <main className={styles.experience}>
+    <main className={styles.experience} data-temporal-page="true">
+      <style jsx global>{`
+        body:has([data-temporal-page="true"]) header[class*="Header_position"] {
+          display: none !important;
+        }
+        body:has([data-temporal-page="true"]) footer:has([class*="Footer_mobile"]) {
+          display: none !important;
+        }
+      `}</style>
       <div className={styles.scrollProgress} aria-hidden="true"><i style={{ width: `${scrollProgress}%` }} /></div>
       <div className={styles.ambientVideo} aria-hidden="true"><video src="/media/vyshakh-profile-loop.mp4" autoPlay muted loop playsInline /></div>
       <div className={styles.noise} aria-hidden="true" />
